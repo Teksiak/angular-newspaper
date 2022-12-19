@@ -1,0 +1,10 @@
+* {margin: 0px; padding: 0px; box-sizing: border-box;}
+
+div.main {
+    width: 415px;
+    margin: auto;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 200px 200px;
+    gap: 15px;
+}
