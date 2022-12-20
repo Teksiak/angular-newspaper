@@ -1,0 +1,14 @@
+<ng-container *ngIf="currentNewspaper==''; else template">
+    <div class="main">
+      <div *ngFor="let el of names">
+        <button>
+          <img (click)="setCurrent(el.klik)" src="http://atarionline.pl/biblioteka/czasopisma/img/{{el.src}}" alt="">
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  
+  <ng-template #template>
+    <app-desc [name]="currentNewspaper" (currentNewspaper)="goBack()"></app-desc>
+  </ng-template>
+  

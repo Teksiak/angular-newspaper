@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import * as txml from 'txml/dist/txml';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +8,30 @@ import { Injectable } from '@angular/core';
 export class NewspaperService {
   private data: any = {};
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) {
+    // const params = new HttpParams().set('zmienna', 'wartosc')
+    this.http.get('./assets/data.xml', { responseType: 'text' }).subscribe(
+      (data) => {
+        const temp = txml.parse(data);
+        // @ts-ignore
+        this.setData(txml.simplify(temp));
+      },
+      (error) => {
+        console.log('Error', error);
+      }
+    );
+  }
+  public checkName(name: string) {
+    const names = this.getNames()
+    for(const el of names) {
+      if(el.klik == name) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   public setData(data: any) {
     this.data = data.czasopisma
@@ -43,14 +68,4 @@ export class NewspaperService {
     }
     return arr
   }
-
-  // async getJSON() {
-  //   return fetch('./assets/data.xml')
-  //     .then((response) => response.text())
-  //     .then((data) => {
-  //       const temp = txml.parse(data);
-  //       // @ts-ignore
-  //       return txml.simplify(temp);
-  //     });
-  // }
 }

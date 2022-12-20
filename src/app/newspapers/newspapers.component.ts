@@ -1,5 +1,6 @@
 import { Component, Input, SimpleChange, SimpleChanges } from '@angular/core';
 import { NewspaperService } from '../newspaper.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-newspapers',
@@ -11,7 +12,8 @@ export class NewspapersComponent {
   @Input() public year: string = "";
   public newspapers: any = []
 
-  constructor(private _newspaperService: NewspaperService) { }
+  constructor(private _newspaperService: NewspaperService) {
+   }
 
   ngOnChanges(changes: SimpleChanges) {
     let prop: SimpleChange = changes['year']

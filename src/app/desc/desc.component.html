@@ -1,4 +1,4 @@
-<h1>{{name}}</h1>
+<h1>{{name.replace('_', ' ')}}</h1>
 <ng-container *ngIf="name!=''">
     <div class="years">
         <button (click)="year = el" *ngFor="let el of years">
@@ -6,4 +6,9 @@
         </button>
     </div>
     <app-newspapers *ngIf="year!=''" [year]="year" [name]="name"></app-newspapers>
+    <div style="display: flex; justify-content: center;">
+        <button class="back" (click)="goBack()">
+          <i class="gg-arrow-left"></i>
+        </button>
+      </div>
 </ng-container>
