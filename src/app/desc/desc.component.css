@@ -1,0 +1,23 @@
+h1 {
+    text-align: center;
+}
+
+div.years {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+button {
+    margin: 5px;
+    padding: 5px 15px 5px 15px;
+    cursor: pointer;
+    background-color: #212121;
+    border: 2px solid #eee;
+    color: #eee;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 10px;
+}

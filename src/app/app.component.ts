@@ -1,32 +1,45 @@
 import { Component } from '@angular/core';
+import { NewspaperService } from './newspaper.service';
+import { HttpClient } from '@angular/common/http';
 import * as txml from 'txml/dist/txml';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  public name = "WOjtrek"
-  public images: string[]
-  constructor() {
-    this.images = []
-  }
-  async ngOnInit() {
-    const data: any = await this.getJSON()
-    console.log(data)
+  public currentNewspaper: string = '';
+  public names: { src: string; klik: string }[] = [];
 
-    for(const el of Object.keys(data.czasopisma.zmienne)) {
-      this.images.push(data.czasopisma.zmienne[el].src)
-    }
+  constructor(
+    private _newspaperService: NewspaperService,
+    private http: HttpClient
+  ) {
+    // const params = new HttpParams().set('zmienna', 'wartosc')
+    this.http.get('./assets/data.xml', { responseType: 'text' }).subscribe(
+      (data) => {
+        const temp = txml.parse(data);
+        // @ts-ignore
+        this._newspaperService.setData(txml.simplify(temp));
+      },
+      (error) => {
+        console.log('Error', error);
+      }
+    );
   }
-  async getJSON() {
-    return fetch("./assets/data.xml")
-    .then(response => response.text())
-    .then(data => {
-      const temp = txml.parse(data)
-      // @ts-ignore
-      return txml.simplify(temp)
-    })
-}
+
+  public goBack() {
+    this.currentNewspaper = '';
+  }
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.names = this._newspaperService.getNames();
+    }, 100)
+  }
+
+  public setCurrent(name: string) {
+    this.currentNewspaper = name;
+  }
 }

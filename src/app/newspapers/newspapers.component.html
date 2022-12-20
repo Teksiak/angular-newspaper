@@ -1,0 +1,32 @@
+<h2>{{year}}</h2>
+<div>
+    <table>
+        <tr>
+            <th>Strona tytułowa</th>
+            <th>Plik</th>
+            <th>Pismo</th>
+            <th>Darczyńscy</th>
+        </tr>
+        <tr *ngFor="let el of newspapers">
+            <td>
+                <img src="http://atarionline.pl/biblioteka/czasopisma/{{name}}/{{el.miniaturka}}" alt="">
+            </td>
+            <td>
+                <b>format:</b> {{el.format}} <br>
+                <b>stron:</b> {{el.stron}} <br>
+                <b>plik: </b> <a href="http://atarionline.pl/biblioteka/czasopisma/{{name}}/{{el.plik}}">tutaj</a>
+            </td>
+            <td>
+                <b>nazwa:</b> {{el.nazwa}} <br>
+                <b>number:</b> {{el.number == null ? "nn" : el.number}} <br>
+                <b>wydawca:</b> {{el.wydawca}}
+            </td>
+            <td>
+                <b>skan:</b> {{el.skan}} <br>
+                <b>przetworzenie:</b> {{el.przetworzenie}} <br>
+                <b>podesłał:</b> {{el.podeslal}}
+            </td>
+
+        </tr>
+    </table>
+</div>

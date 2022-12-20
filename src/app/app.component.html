@@ -1,6 +1,18 @@
-<div class="main">
-  <div *ngFor="let el of images">
-    <img src="http://atarionline.pl/biblioteka/czasopisma/img/{{el}}" alt="">
+<ng-container *ngIf="currentNewspaper==''; else template">
+  <div class="main">
+    <div *ngFor="let el of names">
+      <button>
+        <img (click)="setCurrent(el.klik)" src="http://atarionline.pl/biblioteka/czasopisma/img/{{el.src}}" alt="">
+      </button>
+    </div>
   </div>
-</div>
-<app-desc [parentData]="name"></app-desc>
+</ng-container>
+
+<ng-template #template>
+  <app-desc [name]="currentNewspaper"></app-desc>
+  <div style="display: flex; align-items: center;">
+    <button class="back" (click)="goBack()">
+      <i class="gg-arrow-left"></i>
+    </button>
+  </div>
+</ng-template>

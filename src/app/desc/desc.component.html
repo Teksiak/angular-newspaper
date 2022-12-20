@@ -1,1 +1,9 @@
-<p>{{parentData}}</p>
+<h1>{{name}}</h1>
+<ng-container *ngIf="name!=''">
+    <div class="years">
+        <button (click)="year = el" *ngFor="let el of years">
+            {{el}}
+        </button>
+    </div>
+    <app-newspapers *ngIf="year!=''" [year]="year" [name]="name"></app-newspapers>
+</ng-container>
